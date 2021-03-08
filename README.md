@@ -8,6 +8,6 @@ PlantUML-Python
 ## Funciones
 ```python
 def leerArchivoaClase
-def ClaseaTxt
+def claseaTxt
 def imports
 ```
