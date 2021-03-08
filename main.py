@@ -1,8 +1,31 @@
 import os
-# So
-class PlantumConverter:
+
+class Clase:
+    def __init__(self):
+        self.datos = []
+        self.funciones = []
+
+class GeneradorPlantUMLTxt:
     def __init__(self):
         self.t
+        self.nombreArchivo = '';
+
+    def leerArchivoaClase(self, nombre):
+        self.archivo = open(nombre)
+        clase = Clase()
+        ##Codigo
+        return clase
+    
+    def claseaString(self, clase):
+        self.claseString = ''
+        ##Codigo
+        return self.claseString
+    
+    def imports(self):
+        self.importStrings = ''
+        #Codigo
+        return self.importStrings
+        
 
 #Primero obtener los archivos
 #Despues buscar las clases
@@ -15,6 +38,6 @@ class PlantumConverter:
 #Finalmente se muestra el diagrama
 
 
-#
-os.system("java -jar plantuml.jar DiagramaClases.txt") # Termine sin error
-os.system("xviewer DiagramaClases.png") # Archivo existe
+#Esta parte crea el .png y lo abre
+os.system("java -jar plantuml.jar salida.txt") # Termine sin error
+os.system("xviewer Clases.png") # Archivo existe
