@@ -26,6 +26,8 @@ class GeneradorPlantUMLTxt:
     def __init__(self):
         self.t
         self.nombreArchivo = '';
+        self.clases = []
+        self.relaciones = []
 
     def leerArchivoaClase(self, nombre):
         self.archivo = open(nombre)
