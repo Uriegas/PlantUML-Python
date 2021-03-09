@@ -1,9 +1,26 @@
 import os
 
+class Funcion:
+    def __init__(self):
+        self.nombre
+        self.parametros = []
+        self.retorno
+
+class Dato:
+    def __init__(self):
+        self.nombre
+        self.tipodedato
+
 class Clase:
     def __init__(self):
         self.datos = []
         self.funciones = []
+
+    def addDato(self, dato):
+        self.datos.append(dato)
+        
+    def addFuncion(self, func):
+        self.funciones.append(func)
 
 class GeneradorPlantUMLTxt:
     def __init__(self):
