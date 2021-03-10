@@ -24,15 +24,19 @@ class Clase:
 
 class GeneradorPlantUMLTxt:
     def __init__(self):
-        self.t
-        self.nombreArchivo = '';
+        self.nombreArchivo = "";
         self.clases = []
         self.relaciones = []
 
     def leerArchivoaClase(self, nombre):
         self.archivo = open(nombre)
+        Lines = self.archivo.readlines()
         clase = Clase()
         ##Codigo
+        count = 0
+        for line in Lines:
+            count += 1
+            print("Line {}: {}".format(count,line.strip()))
         return clase
     
     def claseaString(self, clase):
@@ -56,7 +60,9 @@ class GeneradorPlantUMLTxt:
 #Ese txt se manda a plantuml
 #Finalmente se muestra el diagrama
 
+Plant = GeneradorPlantUMLTxt()
+Plant.leerArchivoaClase("Prueba.py")
 
 #Esta parte crea el .png y lo abre
-os.system("java -jar plantuml.jar salida.txt") # Termine sin error
-os.system("xviewer Clases.png") # Archivo existe
+#os.system("java -jar plantuml.jar salida.txt") # Termine sin error
+#os.system("xviewer Clases.png") # Archivo existe
