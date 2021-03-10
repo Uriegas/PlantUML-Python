@@ -1,18 +1,19 @@
 import os
 
 class Funcion:
-    def __init__(self):
-        self.nombre
+    def __init__(self, nombre = "", tipo = "void"):
+        self.nombre = nombre
         self.parametros = []
-        self.retorno
+        self.retorno = tipo
 
 class Dato:
-    def __init__(self):
-        self.nombre
-        self.tipodedato
+    def __init__(self, nombre = "", tipo = "void"):
+        self.nombre = nombre
+        self.tipodedato = tipo
 
 class Clase:
-    def __init__(self):
+    def __init__(self, nombre = ""):
+        self.nombre = nombre
         self.datos = []
         self.funciones = []
 
@@ -37,6 +38,14 @@ class GeneradorPlantUMLTxt:
         for line in Lines:
             count += 1
             print("Line {}: {}".format(count,line.strip()))
+            words = line.split(' ')
+            if(words[0] == "class"):
+                print(words[0])
+                clase.nombre = words[1]
+                print(words[1])
+            if(words[1] == "def"):
+                print(words[1])
+
         return clase
     
     def claseaString(self, clase):
