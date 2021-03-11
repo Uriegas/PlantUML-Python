@@ -23,6 +23,14 @@ class Clase:
     def addFuncion(self, func):
         self.funciones.append(func)
 
+    def toString(self):
+        #Convertir esta clase a string, segun el formato de Plantuml
+        #Kuroro
+        s = ""
+        s += self.nombre
+        return s
+
+
 class GeneradorPlantUMLTxt:
     def __init__(self):
         self.nombreArchivo = "";
