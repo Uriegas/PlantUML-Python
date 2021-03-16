@@ -72,7 +72,7 @@ class GeneradorPlantUMLTxt:
                     clase.funciones.append(line)
                 elif(words[0].find("self.") != -1):
                     variables = words[0].split('.')
-                    clase.datos.append(variables[0])
+                    clase.datos.append(variables[1])
         self.clases.append(clase)
         return clase
 
@@ -103,7 +103,7 @@ class GeneradorPlantUMLTxt:
 #Finalmente se muestra el diagrama
 
 Plant = GeneradorPlantUMLTxt()
-Plant.leerArchivoaClase("Prueba.py")
+Plant.leerArchivoaClase("Prueba2.py")
 print(Plant)
 
 #Esta parte crea el .png y lo abre
