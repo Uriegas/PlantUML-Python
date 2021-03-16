@@ -23,11 +23,12 @@ class Clase:
     def addFuncion(self, func):
         self.funciones.append(func)
 
-    def toString(self):
+    def __str__(self):
         #Convertir esta clase a string, segun el formato de Plantuml
         #Kuroro
-        s = ""
-        s += self.nombre
+        s = "class " + self.nombre + '\n'
+        for fun in self.funciones:
+            s += "+ " + fun + '\n'
         return s
 
 
@@ -42,10 +43,7 @@ class GeneradorPlantUMLTxt:
         Lines = self.archivo.readlines()
         clase = Clase()
         ##Codigo
-        count = 0
         for line in Lines:
-            count += 1
-            print("Line {}: {}".format(count,line.strip()))
             if(len(line) != 0):
                 #Eliminar tabs y salto de linea
                 line = line.replace('\n', '')
@@ -56,8 +54,15 @@ class GeneradorPlantUMLTxt:
                 if(words[0] == "class"):
                     clase.nombre = words[1]
                 if(words[0] == "def"):
-                    print(words[1])
-
+                    line = line.replace("def ", '')
+                    line = line.replace(':', '')
+                    clase.funciones.__add__(line)
+                if(words[0] == "return"):
+                    line = line.replace("return ", '')
+                    line = line + ' ' + clase.funciones[:-1]
+                    del clase.funciones[:-1]
+                    clase.funciones.__add__(line)
+        self.clases.append(clase)
         return clase
     
     def claseaString(self, clase):
