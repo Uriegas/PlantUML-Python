@@ -19,9 +19,9 @@ class Clase:
 
 class GeneradorPlantUMLTxt:
     def __init__(self):
-        self.nombreArchivo = "";
+        self.nombreArchivo = ""
         self.clases = []
-        self.relaciones = []
+        self.relaciones = ""
 
     def leerArchivoaClase(self, nombre):
         self.archivo = open(nombre)
@@ -58,16 +58,42 @@ class GeneradorPlantUMLTxt:
                     clase.datos.append(variables[1])
         self.clases.append(clase)
         return clase
-
-    def imports(self):
-        self.importStrings = ''
-        #Codigo
-        return self.importStrings
         
+    def imports(self):
+        importStrings = ''
+        temp = ''
+        name = []
+        abecedario = ["a", "b", "c", "d", "e"] #Ni me preguntes alab, ando rabiosa
+        auxlen = 0
+        auxcad = ''
+        # Lo guarda en un arreglo sin los parentesís
+        with open('Final.py', 'r') as f:
+            for linea in f:
+              temp =(linea[0:linea.find('c') + 5])  
+              if (temp == 'class'):
+                auxcad = (linea[6:linea.find('(')])
+                auxlen = len(auxcad) + 7
+                auxcad = auxcad + " "
+                auxcad = auxcad + linea[auxlen:linea.find(')')]
+                name.append(auxcad)
+        #Agrega el "->"        
+        for i in name:
+            temp = i[0:i.find(' ')]
+            auxlen = len(temp) + 1 #Aquí se coloca despues del " "_
+            auxtemp = i[auxlen:50]
+            if auxtemp == "":
+                pass
+            else:
+                importStrings = (temp + "->" + auxtemp)
+                print(importStrings)
+        self.relaciones = importStrings
+        return importStrings
+
     def __str__(self):
         st = ""
         for s in self.clases:
             st += s.__str__()
+        st += self.relaciones
         return st
 
 #Primero obtener los archivos
@@ -81,7 +107,7 @@ class GeneradorPlantUMLTxt:
 #Finalmente se muestra el diagrama
 
 Plant = GeneradorPlantUMLTxt()
-Plant.leerArchivoaClase("Prueba2.py")
+Plant.leerArchivoaClase("Prueba.py")
 print(Plant)
 
 #Esta parte crea el .png y lo abre
