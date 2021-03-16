@@ -1,27 +1,10 @@
 import os
 
-class Funcion:
-    def __init__(self, nombre = "", tipo = "void"):
-        self.nombre = nombre
-        self.parametros = []
-        self.retorno = tipo
-
-class Dato:
-    def __init__(self, nombre = "", tipo = "void"):
-        self.nombre = nombre
-        self.tipodedato = tipo
-
 class Clase:
-    def __init__(self, nombre = ""):
-        self.nombre = nombre
+    def __init__(self):
+        self.nombre = ""
         self.datos = []
         self.funciones = []
-
-    def addDato(self, dato):
-        self.datos.append(dato)
-        
-    def addFuncion(self, func):
-        self.funciones.append(func)
 
     def __str__(self):
         #Convertir esta clase a string, segun el formato de Plantuml
@@ -76,11 +59,6 @@ class GeneradorPlantUMLTxt:
         self.clases.append(clase)
         return clase
 
-    def claseaString(self, clase):
-        self.claseString = ''
-        ##Codigo
-        return self.claseString
-    
     def imports(self):
         self.importStrings = ''
         #Codigo
