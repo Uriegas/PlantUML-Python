@@ -52,7 +52,12 @@ class GeneradorPlantUMLTxt:
                 #Analisis de la linea
                 words = line.split(' ')
                 if(words[0] == "class"):
-                    clase.nombre = words[1]
+                    if(clase.nombre):
+                        self.clases.append(clase)
+                        clase = Clase()
+                        pass
+                    else:
+                        clase.nombre = words[1]
                 if(words[0] == "def"):
                     line = line.replace("def ", '')
                     line = line.replace(':', '')
