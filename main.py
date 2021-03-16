@@ -46,13 +46,17 @@ class GeneradorPlantUMLTxt:
         for line in Lines:
             count += 1
             print("Line {}: {}".format(count,line.strip()))
-            words = line.split(' ')
-            if(words[0] == "class"):
-                print(words[0])
-                clase.nombre = words[1]
-                print(words[1])
-            if(words[1] == "def"):
-                print(words[1])
+            if(len(line) != 0):
+                #Eliminar tabs y salto de linea
+                line = line.replace('\n', '')
+                line = line.replace('\t', '')
+
+                #Analisis de la linea
+                words = line.split(' ')
+                if(words[0] == "class"):
+                    clase.nombre = words[1]
+                if(words[0] == "def"):
+                    print(words[1])
 
         return clase
     
