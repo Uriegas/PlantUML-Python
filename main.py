@@ -27,6 +27,8 @@ class Clase:
         #Convertir esta clase a string, segun el formato de Plantuml
         #Kuroro
         s = "class " + self.nombre + '\n'
+        for var in self.datos:
+            s += var + '\n'
         for fun in self.funciones:
             s += "+ " + fun + '\n'
         return s
@@ -56,17 +58,21 @@ class GeneradorPlantUMLTxt:
                         self.clases.append(clase)
                         clase = Clase()
                     #Split name of class to remove: ()
+                    words[1] = words[1].replace(':', '')
                     names = words[1].split('(')
                     clase.nombre = names[0]
-                if(words[0] == "def"):
+                elif(words[0] == "def"):
                     line = line.replace("def ", '')
                     line = line.replace(':', '')
                     clase.funciones.append(line)
-                if(words[0] == "return"):
+                elif(words[0] == "return"):
                     line = line.replace("return ", '')
                     fun = clase.funciones.pop()
                     line = line + ' ' + fun
                     clase.funciones.append(line)
+                elif(words[0].find("self.") != -1):
+                    variables = words[0].split('.')
+                    clase.datos.append(variables[0])
         self.clases.append(clase)
         return clase
 
