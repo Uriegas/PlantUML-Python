@@ -48,11 +48,11 @@ class GeneradorPlantUMLTxt:
                     line = line.replace("def ", '')
                     line = line.replace(':', '')
                     clase.funciones.append(line)
-                elif(words[0] == "return"):
-                    line = line.replace("return ", '')
-                    fun = clase.funciones.pop()
-                    line = line + ' ' + fun
-                    clase.funciones.append(line)
+#                elif(words[0] == "return"):
+#                    line = line.replace("return ", '')
+#                    fun = clase.funciones.pop()
+#                    line = line + ' ' + fun
+#                    clase.funciones.append(line)
                 elif(words[0].find("self.") != -1):
                     variables = words[0].split('.')
                     clase.datos.append(variables[1])
