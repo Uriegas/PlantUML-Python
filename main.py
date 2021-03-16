@@ -59,7 +59,7 @@ class GeneradorPlantUMLTxt:
         self.clases.append(clase)
         return clase
         
-    def imports(self):
+    def imports(self, archivo):
         importStrings = ''
         temp = ''
         name = []
@@ -67,7 +67,7 @@ class GeneradorPlantUMLTxt:
         auxlen = 0
         auxcad = ''
         # Lo guarda en un arreglo sin los parentesís
-        with open('Final.py', 'r') as f:
+        with open(archivo, 'r') as f:
             for linea in f:
               temp =(linea[0:linea.find('c') + 5])  
               if (temp == 'class'):
@@ -84,10 +84,13 @@ class GeneradorPlantUMLTxt:
             if auxtemp == "":
                 pass
             else:
-                importStrings = (temp + "->" + auxtemp)
-                print(importStrings)
-        self.relaciones = importStrings
+                importStrings += (temp + "->" + auxtemp) + '\n'
         return importStrings
+    
+    def generar(self, nombre):
+        self.nombreArchivo = nombre
+        self.leerArchivoaClase(self.nombreArchivo)
+        self.relaciones = self.imports(self.nombreArchivo)
 
     def __str__(self):
         st = ""
@@ -107,7 +110,7 @@ class GeneradorPlantUMLTxt:
 #Finalmente se muestra el diagrama
 
 Plant = GeneradorPlantUMLTxt()
-Plant.leerArchivoaClase("Prueba.py")
+Plant.generar("Prueba.py")
 print(Plant)
 
 #Esta parte crea el .png y lo abre

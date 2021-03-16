@@ -2,7 +2,7 @@ class Padre:
 	pass
 class hija():
 	def __init__(self):
-		self.this
+		self.variable
 	def hola(self):
 		return 0
 	pass
