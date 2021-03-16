@@ -55,21 +55,21 @@ class GeneradorPlantUMLTxt:
                     if(clase.nombre):
                         self.clases.append(clase)
                         clase = Clase()
-                        pass
-                    else:
-                        clase.nombre = words[1]
+                    #Split name of class to remove: ()
+                    names = words[1].split('(')
+                    clase.nombre = names[0]
                 if(words[0] == "def"):
                     line = line.replace("def ", '')
                     line = line.replace(':', '')
-                    clase.funciones.__add__(line)
+                    clase.funciones.append(line)
                 if(words[0] == "return"):
                     line = line.replace("return ", '')
-                    line = line + ' ' + clase.funciones[:-1]
-                    del clase.funciones[:-1]
-                    clase.funciones.__add__(line)
+                    fun = clase.funciones.pop()
+                    line = line + ' ' + fun
+                    clase.funciones.append(line)
         self.clases.append(clase)
         return clase
-    
+
     def claseaString(self, clase):
         self.claseString = ''
         ##Codigo
@@ -80,6 +80,11 @@ class GeneradorPlantUMLTxt:
         #Codigo
         return self.importStrings
         
+    def __str__(self):
+        st = ""
+        for s in self.clases:
+            st += s.__str__()
+        return st
 
 #Primero obtener los archivos
 #Despues buscar las clases
@@ -93,6 +98,7 @@ class GeneradorPlantUMLTxt:
 
 Plant = GeneradorPlantUMLTxt()
 Plant.leerArchivoaClase("Prueba.py")
+print(Plant)
 
 #Esta parte crea el .png y lo abre
 #os.system("java -jar plantuml.jar salida.txt") # Termine sin error
