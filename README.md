@@ -8,8 +8,9 @@ PlantUML-Python
 ## Funciones
 ```python
 def leerArchivoaClase
-def claseaString
 def imports
+def generar
+def __str__
 ```
 
 ## Correr
