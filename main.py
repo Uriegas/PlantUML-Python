@@ -7,13 +7,12 @@ class Clase:
         self.funciones = []
 
     def __str__(self):
-        #Convertir esta clase a string, segun el formato de Plantuml
-        #Kuroro
-        s = "class " + self.nombre + '\n'
+        s = "class " + self.nombre + " { \n"
         for var in self.datos:
-            s += var + '\n'
+            s += var + "\n"
         for fun in self.funciones:
-            s += "+ " + fun + '\n'
+            s += "+" + fun + "\n"
+        s +="} \n"
         return s
 
 
@@ -84,7 +83,7 @@ class GeneradorPlantUMLTxt:
             if auxtemp == "":
                 pass
             else:
-                importStrings += (temp + "->" + auxtemp) + '\n'
+                importStrings += (auxtemp + " <|-- " + temp) + '\n'
         return importStrings
     
     def generar(self, nombre):
@@ -110,9 +109,27 @@ class GeneradorPlantUMLTxt:
 #Finalmente se muestra el diagrama
 
 Plant = GeneradorPlantUMLTxt()
-Plant.generar("Prueba.py")
-print(Plant)
+lectura=input("Nombre del arcivho .py: ")
+Plant.generar(lectura)
+a=str(Plant)
+f=open("DiagramaClase.txt","w")
+f.write("@startuml \n")
+f.write(a)
+f.write("@enduml")
+f.close()
+os.system("java -jar plantuml.jar DiagramaClase.txt")
+try:
+    os.system("DiagramaClase.png")
+except:
+    pass
+try:
+    os.system("xviewer DiagramaClase.png")
+except:
+    pass
+try:
+    os.system("viewnior DiagramaClase.png")
+except:
+    print("Comando para abrir archivo no encontrado")
 
-#Esta parte crea el .png y lo abre
-#os.system("java -jar plantuml.jar salida.txt") # Termine sin error
-#os.system("xviewer Clases.png") # Archivo existe
+ # Termine sin error
+
