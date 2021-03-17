@@ -16,4 +16,7 @@ def imports
 ```
 python main.py
 ```
-Para probar ingrese el mismo archivo [main.py](main.py).
+Para probar el programa ingrese el mismo archivo: [main.py](main.py).
+```
+Nombre del archivo .py: main.py
+```
