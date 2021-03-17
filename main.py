@@ -96,32 +96,26 @@ class GeneradorPlantUMLTxt:
         self.relaciones = self.imports(self.nombreArchivo)
 
     def __str__(self):
-        st = ""
+        st = "@startuml \n"
         for s in self.clases:
             st += s.__str__()
         st += self.relaciones
+        st += "@enduml"
         return st
 
-#Primero obtener los archivos
-#Despues buscar las clases
-#Las funciones de las clases
-#Las relaciones de las clases
+#Primero obtener los archivos, despues buscar las clases
+#Las funciones de las clases, las relaciones de las clases
 #Información en: https://plantuml.com/class-diagram
 
-#El programa genera un txt
-#Ese txt se manda a plantuml
-#Finalmente se muestra el diagrama
 
 Plant = GeneradorPlantUMLTxt()
 lectura=input("Nombre del arcivho .py: ")
 Plant.generar(lectura)
-a=str(Plant)
-f=open("DiagramaClase.txt","w")
-f.write("@startuml \n")
-f.write(a)
-f.write("@enduml")
+f=open(lectura + ".txt","w")
+f.write(str(Plant))
 f.close()
-os.system("java -jar plantuml.jar DiagramaClase.txt")
+#El txt se manda a plantuml, despues se muestra el diagrama
+os.system("java -jar plantuml.jar {}.txt".format(lectura))
 try:
     os.system("DiagramaClase.png")
 except:
@@ -136,4 +130,3 @@ except:
     print("Comando para abrir archivo no encontrado")
 
  # Termine sin error
-
