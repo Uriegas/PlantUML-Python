@@ -1,3 +1,7 @@
+#Primero obtener los archivos, despues buscar las clases
+#Las funciones de las clases, las relaciones de las clases
+#Información en: https://plantuml.com/class-diagram
+
 import os
 
 class Clase:
@@ -32,7 +36,6 @@ class GeneradorPlantUMLTxt:
             if(len(line) != 0):
                 #Eliminar tabs y salto de linea
                 line = line.strip()
-
                 #Analisis de la linea
                 words = line.split(' ')
                 if(words[0] == "class"):
@@ -103,19 +106,20 @@ class GeneradorPlantUMLTxt:
         st += "@enduml"
         return st
 
-#Primero obtener los archivos, despues buscar las clases
-#Las funciones de las clases, las relaciones de las clases
-#Información en: https://plantuml.com/class-diagram
-
-
 Plant = GeneradorPlantUMLTxt()
 lectura=input("Nombre del arcivho .py: ")
+
+#Generar el txt
 Plant.generar(lectura)
 f=open(lectura + ".txt","w")
 f.write(str(Plant))
 f.close()
+
 #El txt se manda a plantuml, despues se muestra el diagrama
-os.system("java -jar plantuml.jar {}.txt".format(lectura))
+try:
+    os.system("java -jar plantuml.jar {}.txt".format(lectura))
+except:
+    print("No se encontro el archivo plantuml.jar")
 try:
     os.system("DiagramaClase.png")
 except:
