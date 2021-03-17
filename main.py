@@ -27,6 +27,7 @@ class GeneradorPlantUMLTxt:
         Lines = self.archivo.readlines()
         clase = Clase()
         ##Codigo
+        INITflag = False
         for line in Lines:
             if(len(line) != 0):
                 #Eliminar tabs y salto de linea
@@ -46,12 +47,16 @@ class GeneradorPlantUMLTxt:
                     line = line.replace("def ", '')
                     line = line.replace(':', '')
                     clase.funciones.append(line)
+                    if(line.find("__init__") != -1):
+                        INITflag = True
+                    else:
+                        INITflag = False
 #                elif(words[0] == "return"):
 #                    line = line.replace("return ", '')
 #                    fun = clase.funciones.pop()
 #                    line = line + ' ' + fun
 #                    clase.funciones.append(line)
-                elif(words[0].find("self.") != -1):
+                elif(words[0].find("self.") != -1 and INITflag == True ):
                     variables = words[0].split('.')
                     clase.datos.append(variables[1])
         self.clases.append(clase)
