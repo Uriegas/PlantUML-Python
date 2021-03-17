@@ -69,7 +69,6 @@ class GeneradorPlantUMLTxt:
         importStrings = ''
         temp = ''
         name = []
-        abecedario = ["a", "b", "c", "d", "e"] #Ni me preguntes alab, ando rabiosa
         auxlen = 0
         auxcad = ''
         # Lo guarda en un arreglo sin los parentesís
