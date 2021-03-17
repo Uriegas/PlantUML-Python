@@ -30,8 +30,7 @@ class GeneradorPlantUMLTxt:
         for line in Lines:
             if(len(line) != 0):
                 #Eliminar tabs y salto de linea
-                line = line.replace('\n', '')
-                line = line.replace('\t', '')
+                line = line.strip()
 
                 #Analisis de la linea
                 words = line.split(' ')
