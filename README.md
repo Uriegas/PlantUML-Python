@@ -11,3 +11,9 @@ def leerArchivoaClase
 def claseaString
 def imports
 ```
+
+## Correr
+```
+python main.py
+```
+Para probar ingrese el mismo archivo [main.py](main.py).
