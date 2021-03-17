@@ -120,15 +120,15 @@ try:
 except:
     print("No se encontro el archivo plantuml.jar")
 try:
-    os.system("DiagramaClase.png")
+    os.system("{}.png".format(lectura))
 except:
     pass
 try:
-    os.system("xviewer DiagramaClase.png")
+    os.system("xviewer {}.png".format(lectura))
 except:
     pass
 try:
-    os.system("viewnior DiagramaClase.png")
+    os.system("viewnior {}.png".format(lectura))
 except:
     print("Comando para abrir archivo no encontrado")
 
